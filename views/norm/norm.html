@@ -1,0 +1,116 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+	<ul class="page-breadcrumb">
+		<li>
+			<a ui-sref="dashboard">首页</a>
+			<i class="fa fa-circle"></i>
+		</li>
+		<li>
+			<a ui-sref="norm">规范</a>
+		</li>
+	</ul>
+</div>
+<h3 class="page-title"> 规范详情 </h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row ng-scope">
+	<div class="col-md-12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet light bordered">
+			<div class="portlet-body">
+				<div class="table-toolbar">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="btn-group">
+								<button id="sample_editable_1_new" class="btn sbold green" ng-click="addType()"> 增加类别
+                                    <i class="fa fa-plus"></i>
+                                </button>
+							</div>
+						</div>
+						<form class="sidebar-search sidebar-search-bordered col-md-4" action="#">
+			                <div class="input-group">
+			                    <input type="text" class="form-control" ng-model="model.currentValue" placeholder="查规范...">
+			                    <span class="input-group-btn" ng-click="search()">
+			                        <a href="" class="btn btn-primary submit">
+			                            <i class="icon-magnifier"></i>
+			                        </a>
+			                    </span>
+			                </div>
+			            </form>
+					</div>
+				</div>
+				<div id="sample_1_wrapper" class="dataTables_wrapper no-footer">
+					<div class="table-scrollable">
+						<table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
+							<thead>
+								<tr role="row">
+									<th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 150px;"> 名称 </th>
+									<th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1"> 类别 </th>
+									<th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1"> 规范 </th>
+									<th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1"> 编号 </th>
+									<th tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="width: 150px;"> 操作 </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in typeList" class="gradeX odd" role="row">
+									<td ui-sref="normDetail({id:x._id})" class="center">{{x.title}}</td>
+									<td class="center"><span ng-repeat="y in x.themeIds">{{y.name}}&nbsp;&nbsp;</span></td>
+									<td class="center"><span ng-repeat="y in x.industryIds">{{y.name}}&nbsp;&nbsp;</span></td>
+									<td class="center"><span>{{x.number}}</span></td>
+									<td>
+										<span class="label label-sm label-success" ng-click="addType(x)"> 修改 </span>&nbsp;&nbsp;
+										<span class="label label-sm label-danger" ng-click="delType(x)"> 删除 </span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<!-- END MAIN CONTENT -->
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">类别</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="sr-only" for="name">名称</label>
+					<input type="text" class="form-control" id="name" ng-model="modal.currentVal" placeholder="请输入名称">
+				</div>
+				<div class="form-group">
+					<label for="name">选择类别</label>
+					<select id="type" class="form-control" ng-model="modal.currentPid">
+						<option value="0">暂无分类</option>
+						<option ng-repeat="x in pList" value="{{x._id}}">{{x.name}}</option>
+					</select>
+				</div>
+				<!--<div class="form-group" style="padding-left: 20px;">
+					<div class="checkbox" ng-repeat="x in pList">
+						<label><input type="checkbox" name="type" value="{{x._id}}">{{x.name}}</label>
+					</div>
+				</div>-->
+				<div class="form-group">
+					<label for="url" class="col-sm-3 control-label">图片选择:</label>
+					<div class="col-sm-7">
+						<input type="file" name="fulAvatar" id="file_upload" value="" class="form-control" placeholder="图片地址">
+						<img ng-if="modal.currentImg" ng-src="{{modal.currentImg}}" width="100" height="100"/>
+					</div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" ng-click="saveType()" data-dismiss="modal" class="btn btn-primary">提交</button>
+			</div>
+		</div>
+	</div>
+</div>

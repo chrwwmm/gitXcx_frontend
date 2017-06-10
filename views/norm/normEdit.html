@@ -1,0 +1,60 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+	<ul class="page-breadcrumb">
+		<li>
+			<a ui-sref="dashboard">首页</a>
+			<i class="fa fa-circle"></i>
+		</li>
+		<li>
+			<a ui-sref="norm">规范</a>
+		</li>
+	</ul>
+</div>
+<h3 class="page-title"> 规范详情 </h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<form class="form-horizontal" role="form">
+	<div class="form-group">
+		<label for="title" class="col-sm-2 control-label">规范标题</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" id="title" ng-model="modal.currentVal" placeholder="请输入">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="number" class="col-sm-2 control-label">规范编号</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" id="number" ng-model="modal.currentNumber" placeholder="请输入">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2">类别选择</label>
+		<div class="col-md-4">
+			<select id="select2_sample1" ng-model="modal.themeList" class="form-control select2" multiple>
+				<option ng-repeat="item in themeList" value="{{item._id}}">{{item.name}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2">行业选择</label>
+		<div class="col-md-4">
+			<select id="select2_sample2" ng-model="modal.industryList" class="form-control select2" multiple>
+				<option ng-repeat="item in industryList" value="{{item._id}}">{{item.name}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-md-10">
+			<script id="editor" type="text/plain" style="width:824px;height:500px;"></script>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="button" class="btn" ng-click="save()"> 保存规范</button>
+		</div>
+	</div>
+</form>
+<!-- END MAIN CONTENT -->
+<script>
+	ComponentsSelect2.init(); // init todo page
+	ComponentsBootstrapSelect.init(); // init todo page
+</script>
